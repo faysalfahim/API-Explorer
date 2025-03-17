@@ -1,0 +1,275 @@
+{
+    "apiServices": [
+      {
+        "id": 1,
+        "name": "User Management API",
+        "description": "Comprehensive user management and authentication services",
+        "version": "1.2.0",
+        "baseUrl": "/api/v1/users",
+        "category": "Core",
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/",
+            "name": "List Users",
+            "description": "Retrieve a paginated list of users",
+            "authentication": "Required",
+            "permissions": ["read:users"],
+            "queryParams": [
+              {
+                "name": "page",
+                "type": "integer",
+                "required": false,
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "limit",
+                "type": "integer",
+                "required": false,
+                "description": "Number of results per page"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "id": "string",
+                    "username": "string",
+                    "email": "string",
+                    "role": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "method": "POST",
+            "path": "/",
+            "name": "Create User",
+            "description": "Create a new user account",
+            "authentication": "Required",
+            "permissions": ["write:users"],
+            "requestBody": {
+              "username": "string",
+              "email": "string",
+              "password": "string",
+              "role": "string"
+            },
+            "responses": {
+              "201": {
+                "description": "User created successfully",
+                "schema": {
+                  "id": "string",
+                  "username": "string",
+                  "email": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Authentication API",
+        "description": "Secure authentication and authorization services",
+        "version": "1.1.0",
+        "baseUrl": "/api/v1/auth",
+        "category": "Security",
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/login",
+            "name": "User Login",
+            "description": "Authenticate user and generate access token",
+            "authentication": "None",
+            "requestBody": {
+              "email": "string",
+              "password": "string"
+            },
+            "responses": {
+              "200": {
+                "description": "Successful login",
+                "schema": {
+                  "accessToken": "string",
+                  "refreshToken": "string",
+                  "user": {
+                    "id": "string",
+                    "username": "string",
+                    "role": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "method": "POST",
+            "path": "/refresh",
+            "name": "Refresh Token",
+            "description": "Generate a new access token using refresh token",
+            "authentication": "Required",
+            "requestBody": {
+              "refreshToken": "string"
+            },
+            "responses": {
+              "200": {
+                "description": "Token refreshed successfully",
+                "schema": {
+                  "accessToken": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Product Catalog API",
+        "description": "Manage product inventory and catalog",
+        "version": "1.0.0",
+        "baseUrl": "/api/v1/products",
+        "category": "Commerce",
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/",
+            "name": "List Products",
+            "description": "Retrieve a list of products with filtering options",
+            "authentication": "Optional",
+            "queryParams": [
+              {
+                "name": "category",
+                "type": "string",
+                "required": false,
+                "description": "Filter products by category"
+              },
+              {
+                "name": "minPrice",
+                "type": "number",
+                "required": false,
+                "description": "Minimum price filter"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful product retrieval",
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "id": "string",
+                    "name": "string",
+                    "price": "number",
+                    "category": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "method": "POST",
+            "path": "/",
+            "name": "Create Product",
+            "description": "Add a new product to the catalog",
+            "authentication": "Required",
+            "permissions": ["write:products"],
+            "requestBody": {
+              "name": "string",
+              "description": "string",
+              "price": "number",
+              "category": "string"
+            },
+            "responses": {
+              "201": {
+                "description": "Product created successfully",
+                "schema": {
+                  "id": "string",
+                  "name": "string",
+                  "price": "number"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Notification Service API",
+        "description": "Send notifications via multiple channels",
+        "version": "1.0.5",
+        "baseUrl": "/api/v1/notifications",
+        "category": "Communication",
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/email",
+            "name": "Send Email",
+            "description": "Send an email notification",
+            "authentication": "Required",
+            "requestBody": {
+              "to": "string",
+              "subject": "string",
+              "body": "string",
+              "template": "string"
+            },
+            "responses": {
+              "200": {
+                "description": "Email sent successfully",
+                "schema": {
+                  "messageId": "string",
+                  "status": "string"
+                }
+              }
+            }
+          },
+          {
+            "method": "POST",
+            "path": "/sms",
+            "name": "Send SMS",
+            "description": "Send an SMS notification",
+            "authentication": "Required",
+            "requestBody": {
+              "to": "string",
+              "message": "string"
+            },
+            "responses": {
+              "200": {
+                "description": "SMS sent successfully",
+                "schema": {
+                  "messageId": "string",
+                  "status": "string"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "globalErrorResponses": {
+      "400": {
+        "description": "Bad Request",
+        "schema": {
+          "error": "string",
+          "details": "object"
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "schema": {
+          "error": "string"
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "schema": {
+          "error": "string"
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "schema": {
+          "error": "string"
+        }
+      }
+    }
+  }

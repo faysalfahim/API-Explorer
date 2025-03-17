@@ -1,10 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import Homepage from "./pages/home";
-import APIViewerPage from "./pages/apiViewer/apiViewer";
+import APIViewerPage from "./pages/apiViewer";
 import RequestAPIKeyPage from "./pages/requestAPIKey/apiKeyRequest";
 import ViewAPIKeyPage from "./pages/viewAPIKey/viewAPIKey";
-
 
 function App() {
   return (

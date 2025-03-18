@@ -5,17 +5,23 @@ interface HeaderProps {
   name: string;
   title: string;
   message: string;
+  styles?: string;
 }
 
-const SectionHeader: React.FC<HeaderProps> = ({
+const PageHeader: React.FC<HeaderProps> = ({
   Icon,
   name,
   title,
   message,
+  styles,
 }) => {
   return (
     <div className="text-center">
-      <div className="inline-flex items-center bg-indigo-50 rounded-full px-6 py-2 mb-4">
+      <div
+        className={`inline-flex items-center ${
+          styles ? styles : "bg-indigo-50"
+        }  rounded-full px-6 py-2 mb-4`}
+      >
         <Icon className="h-5 w-5 text-indigo-600 mr-2" />
         <span className="text-sm font-medium text-indigo-700">{name}</span>
       </div>
@@ -27,4 +33,4 @@ const SectionHeader: React.FC<HeaderProps> = ({
   );
 };
 
-export default SectionHeader;
+export default PageHeader;

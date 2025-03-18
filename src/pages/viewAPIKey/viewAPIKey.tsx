@@ -12,7 +12,7 @@ import {
   Globe,
 } from "lucide-react";
 import AppLayout from "../../components/layouts/AppLayout";
-import SectionHeader from "../../components/common/SectionHeader";
+import PageHeader from "../../components/common/PageHeader";
 
 // Interface for API Key
 interface APIKey {
@@ -84,7 +84,7 @@ const ViewAPIKeyPage = () => {
         <div className="container mx-auto max-w-xl px-4">
           <div className="space-y-8">
             {/* Header */}
-            <SectionHeader
+            <PageHeader
               Icon={Key}
               name="API Key Management"
               title="Manage Your API Access"

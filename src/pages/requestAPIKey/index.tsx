@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Shield, CheckCircle, Globe, Send, Loader } from "lucide-react";
 import AppLayout from "../../components/layouts/AppLayout";
-import SectionHeader from "../../components/common/SectionHeader";
+import PageHeader from "../../components/common/PageHeader";
 import Notification from "./Notification";
 
 // Notification Component
@@ -42,7 +42,7 @@ const RequestAPIKeyPage = () => {
         <div className="container mx-auto px-4 py-12 lg:px-8">
           <div className="max-w-xl mx-auto space-y-8">
             {/* Header Section */}
-            <SectionHeader
+            <PageHeader
               Icon={Shield}
               name="API Key Request"
               title="Request Your API Access"

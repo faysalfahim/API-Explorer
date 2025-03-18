@@ -1,14 +1,14 @@
-import Footer from '../common/footer'
-import Navbar from '../common/navbar'
+import Footer from "../common/footer";
+import Navbar from "../common/navbar";
 
-
-const AppLayout = ({children}) => {
+const AppLayout = ({ children }) => {
   return (
-    <><Navbar/>
-    <div className='m-auto'>{ children }</div>
-    <Footer/>
+    <>
+      <Navbar />
+      <div className="m-auto">{children}</div>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

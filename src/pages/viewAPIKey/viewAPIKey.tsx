@@ -14,7 +14,6 @@ import {
 import AppLayout from "../../components/layouts/AppLayout";
 import PageHeader from "../../components/common/PageHeader";
 
-// Interface for API Key
 interface APIKey {
   id: string;
   domain: string;
@@ -25,7 +24,6 @@ interface APIKey {
 }
 
 const ViewAPIKeyPage = () => {
-  // State management
   const [domain, setDomain] = useState("");
   const [apiKey, setApiKey] = useState<APIKey | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,23 +31,18 @@ const ViewAPIKeyPage = () => {
   const [isKeyVisible, setIsKeyVisible] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
-  // Dummy function to simulate API key fetching
   const fetchAPIKey = async () => {
-    // Reset previous states
     setApiKey(null);
     setError(null);
     setIsLoading(true);
 
     try {
-      // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Dummy validation
       if (!domain.trim()) {
         throw new Error("Please enter a valid domain");
       }
 
-      // Simulate API key generation
       const generatedKey: APIKey = {
         id: Math.random().toString(36).substring(2),
         domain: domain,
@@ -69,7 +62,6 @@ const ViewAPIKeyPage = () => {
     }
   };
 
-  // Copy API Key to clipboard
   const copyAPIKey = () => {
     if (apiKey) {
       navigator.clipboard.writeText(apiKey.key);
@@ -80,10 +72,9 @@ const ViewAPIKeyPage = () => {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
+      <div className="min-h-screen bg-gray-50 py-12">
         <div className="container mx-auto max-w-xl px-4">
-          <div className="space-y-8">
-            {/* Header */}
+          <div className="space-y-6">
             <PageHeader
               Icon={Key}
               name="API Key Management"
@@ -91,21 +82,19 @@ const ViewAPIKeyPage = () => {
               message="Securely generate and manage your API keys"
             />
 
-            {/* Main Card */}
-            <div className="bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
-              <div className="p-8 space-y-6">
-                {/* Domain Input Section */}
+            <div className="bg-white shadow-xl rounded-2xl border border-gray-100">
+              <div className="p-6 space-y-4">
                 <div>
                   <label
                     htmlFor="domain"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-xs font-medium text-gray-700 mb-1"
                   >
                     Enter Domain
                   </label>
-                  <div className="flex space-x-3">
+                  <div className="flex space-x-2">
                     <div className="relative flex-grow">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Globe className="h-5 w-5 text-gray-400" />
+                        <Globe className="h-4 w-4 text-gray-400" />
                       </div>
                       <input
                         type="text"
@@ -114,77 +103,75 @@ const ViewAPIKeyPage = () => {
                         onChange={(e) => setDomain(e.target.value)}
                         placeholder="example.com"
                         className="
-                      block w-full pl-10 pr-3 py-3 
-                      border border-gray-300 rounded-xl 
-                      shadow-sm focus:outline-none 
-                      focus:ring-2 focus:ring-indigo-500 
-                      focus:border-indigo-500
-                      transition-all duration-300
-                    "
+                        block w-full pl-9 pr-3 py-2 text-sm
+                        border border-gray-300 rounded-xl 
+                        shadow-sm focus:outline-none 
+                        focus:ring-2 focus:ring-indigo-500 
+                        focus:border-indigo-500
+                        transition-all duration-300
+                      "
                       />
                     </div>
                     <button
                       onClick={fetchAPIKey}
                       disabled={isLoading}
                       className="
-                    px-6 py-3 
-                    bg-indigo-600 text-white 
-                    rounded-xl 
-                    hover:bg-indigo-700 
-                    focus:outline-none 
-                    focus:ring-2 focus:ring-indigo-500 
-                    focus:ring-offset-2
-                    transition-all duration-300
-                    flex items-center
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                  "
+                        px-4 py-2 text-sm
+                        bg-indigo-600 text-white 
+                        rounded-xl 
+                        hover:bg-indigo-700 
+                        focus:outline-none 
+                        focus:ring-2 focus:ring-indigo-500 
+                        focus:ring-offset-2
+                        transition-all duration-300
+                        flex items-center
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                      "
                     >
                       {isLoading ? (
                         <>
-                          <Loader className="h-5 w-5 mr-2 animate-spin" />
+                          <Loader className="h-4 w-4 mr-2 animate-spin" />
                           Fetching...
                         </>
                       ) : (
-                        "Fetch Your Key"
+                        "Fetch Key"
                       )}
                     </button>
                   </div>
                 </div>
 
-                {/* Error Handling */}
                 {error && (
                   <div
                     className="
-                  bg-red-50 border border-red-200 
-                  text-red-800 px-4 py-3 
-                  rounded-xl relative 
-                  flex items-center
-                "
+                      bg-red-50 border border-red-200 
+                      text-red-800 px-4 py-2 
+                      rounded-xl relative 
+                      flex items-center text-xs
+                    "
                     role="alert"
                   >
-                    <AlertTriangle className="h-5 w-5 mr-3 text-red-600" />
+                    <AlertTriangle className="h-4 w-4 mr-2 text-red-600" />
                     <span>{error}</span>
                   </div>
                 )}
 
-                {/* API Key Display */}
                 {apiKey && (
-                  <div className="bg-gray-50 rounded-xl p-5 space-y-4">
+                  <div className="bg-gray-50 rounded-xl p-4 space-y-3">
                     <div className="flex justify-between items-center">
-                      <h2 className="text-lg font-semibold text-gray-900">
+                      <h2 className="text-sm font-semibold text-gray-900">
                         API Key for {apiKey.domain}
                       </h2>
                       <span
                         className={`
-                      inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                      ${
-                        apiKey.status === "active"
-                          ? "bg-green-100 text-green-800"
-                          : apiKey.status === "expired"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
-                      }
-                    `}
+                          inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                          ${
+                            apiKey.status === "active"
+                              ? "bg-green-100 text-green-800"
+                              : apiKey.status === "expired"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-red-100 text-red-800"
+                          }
+                        `}
                       >
                         {apiKey.status}
                       </span>
@@ -196,51 +183,49 @@ const ViewAPIKeyPage = () => {
                         value={apiKey.key}
                         readOnly
                         className="
-                      w-full px-3 py-3 
-                      border border-gray-300 rounded-xl 
-                      bg-white 
-                      pr-24
-                    "
+                          w-full px-3 py-2 text-sm
+                          border border-gray-300 rounded-xl 
+                          bg-white 
+                          pr-20
+                        "
                       />
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 space-x-2">
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 space-x-1">
                         <button
                           onClick={() => setIsKeyVisible(!isKeyVisible)}
                           className="
-                        p-2 rounded-md 
-                        hover:bg-gray-200 
-                        focus:outline-none 
-                        focus:ring-2 focus:ring-indigo-500
-                      "
+                            p-1.5 rounded-md 
+                            hover:bg-gray-200 
+                            focus:outline-none 
+                            focus:ring-2 focus:ring-indigo-500
+                          "
                         >
                           {isKeyVisible ? (
-                            <EyeOff className="h-5 w-5" />
+                            <EyeOff className="h-4 w-4" />
                           ) : (
-                            <Eye className="h-5 w-5" />
+                            <Eye className="h-4 w-4" />
                           )}
                         </button>
-                        <div className="relative">
-                          <button
-                            onClick={copyAPIKey}
-                            aria-label={isCopied ? "Copied!" : "Copy API Key"}
-                            className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 group relative"
-                          >
-                            {isCopied ? (
-                              <CheckCircle className="h-5 w-5 text-white" />
-                            ) : (
-                              <Copy className="h-5 w-5" />
-                            )}
-                            {isCopied && (
-                              <span className="absolute bottom-full left-1/2 transform-translate-x-1/2  bg-gray-800  text-white text-xs px-2 py-1 rounded mb-2 whitespace-nowrap z-10 opacity-100">
-                                Copied!
-                              </span>
-                            )}
-                          </button>
-                        </div>
+                        <button
+                          onClick={copyAPIKey}
+                          aria-label={isCopied ? "Copied!" : "Copy API Key"}
+                          className="p-1.5 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 group relative"
+                        >
+                          {isCopied ? (
+                            <CheckCircle className="h-4 w-4 text-white" />
+                          ) : (
+                            <Copy className="h-4 w-4" />
+                          )}
+                          {isCopied && (
+                            <span className="absolute bottom-full left-1/2 transform-translate-x-1/2  bg-gray-800 text-white text-xs px-2 py-1 rounded mb-2 whitespace-nowrap z-10 opacity-100 transition-all duration-300">
+                              Copied!
+                            </span>
+                          )}
+                        </button>
                       </div>
                     </div>
 
-                    <div className="text-sm text-gray-500 flex items-center">
-                      <Clock className="h-4 w-4 mr-2" />
+                    <div className="text-xs text-gray-500 flex items-center">
+                      <Clock className="h-3 w-3 mr-2" />
                       Created: {new Date(apiKey.createdAt).toLocaleString()}
                     </div>
                   </div>
@@ -248,20 +233,19 @@ const ViewAPIKeyPage = () => {
               </div>
             </div>
 
-            {/* Security Best Practices */}
-            <div className="bg-white shadow-xl rounded-2xl p-6 border border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">
+            <div className="bg-white shadow-xl rounded-2xl p-5 border border-gray-100">
+              <h2 className="text-base font-bold text-gray-900 mb-3 text-center">
                 API Key Best Practices
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
                   "Keep your API key confidential and secure",
                   "Regenerate keys periodically to maintain security",
                   "Use environment variables to store sensitive keys",
                 ].map((practice, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <Shield className="h-6 w-6 text-indigo-500 flex-shrink-0 mt-1" />
-                    <p className="text-gray-600">{practice}</p>
+                  <div key={index} className="flex items-start space-x-2">
+                    <Shield className="h-5 w-5 text-indigo-500 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs text-gray-600">{practice}</p>
                   </div>
                 ))}
               </div>

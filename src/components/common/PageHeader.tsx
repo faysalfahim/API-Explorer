@@ -20,15 +20,15 @@ const PageHeader: React.FC<HeaderProps> = ({
       <div
         className={`inline-flex items-center ${
           styles ? styles : "bg-indigo-50"
-        }  rounded-full px-6 py-2 mb-4`}
+        } rounded-full px-4 py-1.5 mb-3`}
       >
-        <Icon className="h-5 w-5 text-indigo-600 mr-2" />
-        <span className="text-sm font-medium text-indigo-700">{name}</span>
+        <Icon className="h-4 w-4 text-indigo-600 mr-1.5" />
+        <span className="text-xs font-medium text-indigo-700">{name}</span>
       </div>
-      <h3 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+      <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
         {title}
       </h3>
-      <p className="mt-3 text-lg text-gray-600">{message}</p>
+      <p className="mt-2 text-sm text-gray-600 max-w-xl mx-auto">{message}</p>
     </div>
   );
 };

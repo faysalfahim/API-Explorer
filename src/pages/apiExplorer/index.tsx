@@ -10,10 +10,9 @@ const APIExplorer = () => {
       <div className="pt-8 bg-gray-50">
         <PageHeader
           Icon={GlobeIcon} // Pass the imported icon component
-          name="Available API Services"
+          name="API Services"
           title=""
           message=""
-          styles="bg-indigo-100"
         />
         <SearchBar />
         <ApiServices />
